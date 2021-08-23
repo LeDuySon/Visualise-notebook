@@ -31,7 +31,7 @@ def check_in_rect_center_point(point, rect):
 		return True
 	return False
 
-def check_in_rect_iou(bb1, bb2, threshold=0.6):
+def check_in_rect_iou(bb1, bb2, threshold=0.8):
     """
     Calculate the Intersection over Union (IoU) of two bounding boxes.
 

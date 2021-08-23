@@ -12,16 +12,17 @@ def click_and_crop(event, x, y, flags, param):
     # (x, y) coordinates and indicate that cropping is being
     # performed
     if event == cv2.EVENT_LBUTTONDOWN:
-        refPt = [(x, y)]
+        refPt.append((x, y))
         cropping = True
     # check to see if the left mouse button was released
     elif event == cv2.EVENT_LBUTTONUP:
         # record the ending (x, y) coordinates and indicate that
         # the cropping operation is finished
         refPt.append((x, y))
+        print(refPt)
         cropping = False
         # draw a rectangle around the region of interest
-        cv2.rectangle(image, refPt[0], refPt[1], (0, 255, 0), 2)
+        cv2.rectangle(image, refPt[-2], refPt[-1], (0, 255, 0), 2)
         cv2.imshow("image", image)
 
 
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     info["img_size"] = image.shape[:2] # h, w
     
     if(len(refPt) % 2 == 0):
-        for i in range(len(refPt) - 1):
+        for i in range(0, len(refPt) - 1, 2):
             info["boxes"].append([float(refPt[i][0]), float(refPt[i][1]), float(refPt[i+1][0]), float(refPt[i+1][1])])
     else:
         print("Error")
